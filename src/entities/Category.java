@@ -1,11 +1,17 @@
 package entities;
 
+import exceptions.NullPointerException;
+
 public class Category {
     private String name;
     private String description;
 
-    public Category(String name, String description) {
-        this.name = name;
+    public Category(String name, String description) throws NullPointerException
+    {
+        if((name == null) || (description == null)){
+            throw new NullPointerException("name can not be null");
+        }
+        this.name = name.toLowerCase();
         this.description = description;
     }
 
@@ -14,7 +20,7 @@ public class Category {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toLowerCase();
     }
 
     public String getDescription() {

@@ -1,22 +1,39 @@
 package entities;
 
+import exceptions.IllegalArgumentException;
+
 import java.util.Date;
 
 public class Expense {
-    private int amount;
+    private static int contador = 0;
+    private double amount;
     private Date date;
     private Category category;
     private String description;
+    private int id = 0;
 
-    public Category getCategory() {
-        return category;
-    }
 
-    public Expense(int amount, Date date, String description, Category category) {
+    public Expense(double amount, Date date, String description, Category category) throws IllegalArgumentException {
+        if(amount < 0){
+            throw new IllegalArgumentException("amount, can not be negative");
+        }
         this.amount = amount;
         this.date = date;
         this.description = description;
         this.category = category;
+        this.id += contador++;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Category getCategory() {
+        return category;
     }
 
     public void setCategory(Category category) {
@@ -31,11 +48,11 @@ public class Expense {
         this.description = description;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
