@@ -1,7 +1,5 @@
 package entities;
 
-import exceptions.NullPointerException;
-
 public class Category {
     private String name;
     private String description;

@@ -3,6 +3,7 @@ package entities;
 import exceptions.IllegalArgumentException;
 
 import java.util.Date;
+import java.util.List;
 
 public class Expense {
     private static int contador = 0;
@@ -21,7 +22,7 @@ public class Expense {
         this.date = date;
         this.description = description;
         this.category = category;
-        this.id += contador++;
+        this.id = contador++;
     }
 
     public int getId() {
@@ -52,7 +53,10 @@ public class Expense {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(double amount) throws  IllegalArgumentException {
+        if(amount < 0){
+            throw  new IllegalArgumentException("amount should be greater than 0");
+        }
         this.amount = amount;
     }
 

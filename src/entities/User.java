@@ -2,7 +2,7 @@ package entities;
 
 import exceptions.ExpenseNotFoundException;
 import exceptions.IllegalArgumentException;
-import exceptions.NullPointerException;
+import exceptions.NotNullException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,11 @@ public class User {
         this.expenses = expenses;
     }
 
-    public User(String name, String email) {
+    public User(String name, String email) throws NotNullException
+    {
+        if(name == null || email == null){
+            throw new NotNullException("name, email can not be null");
+        }
         this.name = name;
         this.email = email;
         this.expenses = new ArrayList<>();
@@ -41,9 +45,9 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-    public void addExpense(Expense newExpense) throws NullPointerException,IllegalArgumentException{
+    public void addExpense(Expense newExpense) throws IllegalArgumentException,NotNullException{
         if (newExpense == null){
-            throw  new NullPointerException("expense no puede se nulo");
+            throw  new NotNullException("expense can not be null");
         }
         if(newExpense.getAmount() < 0){
             throw new IllegalArgumentException("Amount coulbe greater than 0");
@@ -76,7 +80,8 @@ public class User {
 
             Expense expenseToUpdate = null;
             for (Expense e : expenses){
-                if(e.getId() == id) {
+                System.out.println(id +" soy" + e.getId());
+                if(e.getId() == id) {;
                     expenseToUpdate = e;
                     break;
                 }
