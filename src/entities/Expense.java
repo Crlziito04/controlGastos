@@ -1,23 +1,34 @@
 package entities;
 
 import exceptions.IllegalArgumentException;
+import exceptions.NotNullException;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class Expense {
     private static int contador = 0;
-    private double amount;
+    private Double amount;
     private Date date;
     private Category category;
     private String description;
     private int id = 0;
 
 
-    public Expense(double amount, Date date, String description, Category category) throws IllegalArgumentException {
-        if(amount < 0){
+    public Expense(Double amount, Date date, String description, Category category) throws IllegalArgumentException,NotNullException {
+        if(amount == null){
+            throw new IllegalArgumentException("amount, can not be null");
+        }
+        if(amount < 0) {
             throw new IllegalArgumentException("amount, can not be negative");
         }
+       if(Objects.isNull(date)) {
+            throw new NotNullException("Date, cant be null");
+        }
+       if (Objects.isNull(description)){
+           throw new NotNullException("string, can not be null");
+       }
         this.amount = amount;
         this.date = date;
         this.description = description;

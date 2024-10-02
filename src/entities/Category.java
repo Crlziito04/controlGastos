@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.Objects;
+
 public class Category {
     private String name;
     private String description;
